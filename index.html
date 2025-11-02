@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shubham Portfolio</title>
+    <!-- Load Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Define the unique font family and default smooth scrolling behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FB; /* Custom light background */
+        }
+        /* Custom scrollbar for aesthetics (optional, can be removed) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #008080;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F8F9FB;
+        }
+        /* Style for the sticky header */
+        .sticky-header {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+    <script>
+        // Tailwind Configuration for custom color palette and font
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-teal': '#008080', // Deep Teal - Professional & Precise
+                        'accent-orange': '#FF8C00', // Bright Orange - Energy & Innovation
+                        'background-light': '#F8F9FB', // Very light background
+                        'text-dark': '#1C2E49', // Dark Navy/Slate for body text
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+
+        // JavaScript for handling the mobile menu toggle and smooth scrolling
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuButton = document.getElementById('menuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const navLinks = document.querySelectorAll('#mobileMenu a, #desktopNav a');
+
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked (for smooth scrolling)
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Simple intersection observer to add a subtle fade-in effect to sections
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        entry.target.classList.remove('opacity-0', 'translate-y-4');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('transition-all', 'duration-700', 'ease-out', 'opacity-0', 'translate-y-4');
+                observer.observe(section);
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header id="header" class="sticky-header sticky top-0 bg-white z-40">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-2xl font-extrabold text-text-dark tracking-tighter">
+                Shubham Kumar <span class="text-primary-teal">Jha</span>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <div id="desktopNav" class="hidden md:flex space-x-8">
+                <a href="#about" class="text-text-dark hover:text-accent-orange font-medium transition duration-150">About</a>
+                <a href="#skills" class="text-text-dark hover:text-accent-orange font-medium transition duration-150">Skills</a>
+                <a href="#projects" class="text-text-dark hover:text-accent-orange font-medium transition duration-150">Experience</a>
+                <a href="#contact" class="text-white bg-accent-orange hover:bg-primary-teal px-4 py-2 rounded-lg font-semibold transition duration-300 shadow-md">
+                    Get in Touch
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menuButton" class="md:hidden p-2 rounded-lg text-text-dark hover:bg-gray-100 transition duration-150">
+                <!-- Lucide Menu Icon (Inline SVG) -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white px-4 pb-4">
+            <div class="flex flex-col space-y-2">
+                <a href="#about" class="text-text-dark hover:text-accent-orange font-medium py-2 border-b border-gray-100">About</a>
+                <a href="#skills" class="text-text-dark hover:text-accent-orange font-medium py-2 border-b border-gray-100">Skills</a>
+                <a href="#projects" class="text-text-dark hover:text-accent-orange font-medium py-2 border-b border-gray-100">Experience</a>
+                <a href="#contact" class="text-white bg-primary-teal hover:bg-accent-orange px-4 py-2 rounded-lg font-semibold mt-2 text-center">
+                    Get in Touch
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="pt-16 pb-24 lg:pt-24 lg:pb-32 bg-background-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <!-- Text Content -->
+                <div class="lg:w-3/5 text-center lg:text-left">
+                    <span class="text-primary-teal font-semibold text-lg uppercase tracking-wider mb-2 block">Mechanical Engineering | Innovation | Design</span>
+                    <h1 class="text-5xl md:text-6xl font-extrabold text-text-dark leading-tight mb-4">
+                        Precision-Driven <span class="text-primary-teal">Mechanical</span> Engineer
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 max-w-xl lg:max-w-none">
+                        Experienced CNG In-Charge with 4+ years in operations and maintenance. Skilled in optimizing processes, ensuring safety compliance, and leading teams to enhance efficiency and reliability.
+                    </p>
+                </div>
+
+                <!-- Image Placeholder -->
+                <div class="lg:w-2/5 flex justify-center">
+                    <div class="w-64 h-64 md:w-80 md:h-80 bg-gray-200 rounded-full flex items-center justify-center border-4 border-primary-teal shadow-2xl">
+                        <img src="pic.jpg" alt="PFP" class="rounded-full object-cover w-full h-full p-2" onerror="this.onerror=null; this.src='https://placehold.co/300x300/e0e0e0/333333?text=Professional+Photo'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 lg:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-text-dark mb-4">About Me</h2>
+            <div class="h-1 w-20 bg-accent-orange mx-auto rounded mb-12"></div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div>
+                    <h3 class="text-2xl font-semibold text-primary-teal mb-4">The Engineering Mindset</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        A passionate and innovative CNG In-Charge with over 4 years of hands-on experience in operating and maintaining advanced CNG systems. I specialize in optimizing compressor performance, implementing data-driven maintenance strategies, and integrating IoT-based monitoring for smarter, safer, and more efficient operations. Known for turning technical challenges into opportunities for innovation, I focus on minimizing downtime, enhancing reliability, and driving sustainable improvements in CNG infrastructure. With a strong foundation in both technical execution and strategic problem-solving, I’m committed to shaping the future of clean energy operations through technology and precision.
+                        </p>
+                </div>
+                <!-- Key Metrics Card -->
+                <div class="bg-background-light p-6 rounded-xl shadow-lg border border-gray-100">
+                    <ul class="space-y-4">
+                        <li class="flex items-center space-x-3">
+                            <span class="text-accent-orange font-bold text-3xl">4+</span>
+                            <span class="text-lg text-text-dark font-medium">Years of Professional Experience</span>
+                        </li>
+
+                        <li class="flex items-center space-x-3">
+                            <span class="text-accent-orange font-bold text-3xl">100%</span>
+                            <span class="text-lg text-text-dark font-medium">Skilled in Mechanical/Electrical Troubleshooting</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 lg:py-28 bg-background-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-text-dark mb-4">Technical Proficiency</h2>
+            <div class="h-1 w-20 bg-primary-teal mx-auto rounded mb-12"></div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Skill Card 2: Analysis & Simulation -->
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 border-t-4 border-primary-teal">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <!-- Lucide Microscope Icon -->
+                        <svg class="w-8 h-8 text-accent-orange" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 0 0-14 0"/><path d="M4 12a8 8 0 0 1 8-8v16"/><path d="M12 4a7 7 0 0 0 7 7 3 3 0 0 1 3 3v2"/></svg>
+                        <h3 class="text-xl font-bold text-text-dark">Management & Leadership Skills</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2 ml-2">
+                        <li>Team Leadership & Supervision</li>
+                        <li>Cross-Functional Collaboration</li>
+                        <li>Decision-Making & Problem Solving</li>
+                        <li>Performance Management</li>
+                    </ul>
+                </div>
+                
+                <!-- Skill Card 1: CAD & Design -->
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 border-t-4 border-primary-teal">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <!-- Lucide Drafting Compass Icon -->
+                        <img src="skill.svg" class="w-8 h-8 text-accent-orange" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 16 12 12 8 16">
+                        <h3 class="text-xl font-bold text-text-dark">Technical Skills</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2 ml-2">
+                        <li>CNG Operations & Maintenance</li>
+                        <li>Maintenance Scheduling & Planning</li>
+                        <li>Safety & Regulatory Compliance</li>
+                        <li>Inspection & Audit Management</li>
+                    </ul>
+                </div>
+
+                <!-- Skill Card 3: Manufacturing & Tools -->
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 border-t-4 border-primary-teal">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <!-- Lucide Wrench Icon -->
+                        <svg class="w-8 h-8 text-accent-orange" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.4 1.4a1 1 0 0 0 1.4 0l.4-.4a2 2 0 0 0 0-2.8l-1.4-1.4a2 2 0 0 0-2.8 0l-.4.4Z"/><path d="M16 4l-4 4 1.4 1.4 4-4"/><path d="M7.7 20.3a1 1 0 0 0-1.4 0l-1.4-1.4a1 1 0 0 0 0-1.4l.4-.4a2 2 0 0 0 2.8 0l1.4 1.4a2 2 0 0 0 0 2.8l-.4.4Z"/><path d="M8 20l4-4-1.4-1.4-4 4"/></svg>
+                        <h3 class="text-xl font-bold text-text-dark">Operational & Analytical Skills</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2 ml-2">
+                        <li>Efficiency Improvement</li>
+                        <li>Operational Reliability Enhancement</li>
+                        <li>Data Documentation & Reporting</li>
+                        <li>Compliance Monitoring</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <section id="projects" class="py-20 lg:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-text-dark mb-4">Professional Experience</h2> 
+            <div class="h-1 w-20 bg-accent-orange mx-auto rounded mb-12"></div>
+            
+            <!-- New Listed Experience Structure -->
+            <div class="max-w-3xl mx-auto space-y-12">
+
+                <!-- Experience Item 1: CNG In-Charge -->
+                <div class="border-l-4 border-primary-teal pl-6 py-2 relative bg-background-light p-6 rounded-xl shadow-lg">
+                    <!-- Timeline Dot -->
+                    <div class="absolute -left-2 top-6 w-4 h-4 bg-accent-orange rounded-full ring-4 ring-white"></div>
+                    
+                    <h3 class="text-2xl font-bold text-text-dark mb-1">Senior Services Engineer</h3>
+                    <p class="text-lg text-primary-teal font-semibold mb-2">Sicom Sales & Engineering Pvt. Ltd. | Pune, India</p>
+                    <span class="text-sm text-gray-500 font-medium bg-gray-100 px-3 py-1 rounded-full inline-block mb-4">Oct 2025 – Present</span>
+                    
+                    <ul class="list-disc ml-6 text-gray-700 space-y-2">
+                        
+                        <li>Skilled in installation, commissioning, operation, and preventive/corrective maintenance of CNG compressors (reciprocating & screw) and station equipment.</li>
+                        <li>Expertise in troubleshooting compressor issues including pressure fluctuations, overheating, lubrication failures, vibration, and priority panel faults.</li>
+                        <li>Strong knowledge of mechanical, electrical, instrumentation, PLC systems, and high-pressure gas handling as per PESO & safety standards.</li>
+                        <li>Experienced in overhaul and repair of major compressor components and managing spares through coordination with OEMs/vendors.</li>
+                        <li>Leads on-site maintenance teams, trains technicians, maintains detailed logs, analyzes performance data, and ensures maximum uptime with high safety & reliability.</li>
+                    </ul>
+                </div>
+                
+                <!-- Experience Item 2: CNG In-Charge -->
+                <div class="border-l-4 border-primary-teal pl-6 py-2 relative bg-background-light p-6 rounded-xl shadow-lg">
+                    <!-- Timeline Dot -->
+                    <div class="absolute -left-2 top-6 w-4 h-4 bg-accent-orange rounded-full ring-4 ring-white"></div>
+                    
+                    <h3 class="text-2xl font-bold text-text-dark mb-1">CNG In-Charge </h3>
+                    <p class="text-lg text-primary-teal font-semibold mb-2">S.R Enterprises. | Bihar, India</p>
+                    <span class="text-sm text-gray-500 font-medium bg-gray-100 px-3 py-1 rounded-full inline-block mb-4">Jan 2024 – Oct 2025</span>
+                    
+                    <ul class="list-disc ml-6 text-gray-700 space-y-2">
+                       <li>Project Management: Supported the planning and execution of various City Gas Distribution (CGD) projects, including new installations, station expansions, and infrastructure upgrades.</li>
+                        <li>Technical Design and Operations: Contributed to project design and specifications, assisted with site surveys for pipeline installations, and implemented safety protocols.</li>
+                        <li>Maintenance and Data Analysis: Supported maintenance through regular inspections and troubleshooting. Used data analysis to interpret pressure and flow data to optimize gas distribution.</li>
+                        <li>Collaboration: Collaborated with multi-disciplinary teams, including engineers and technicians, to ensure seamless project execution.</li>
+                        <li>Professional Development: Actively participated in continuous learning initiatives, acquiring certifications and attending workshops to stay current with industry advancements.</li>
+                    </ul>
+                </div>
+
+                <!-- Experience Item 3: Junior Engineer -->
+                <div class="border-l-4 border-primary-teal pl-6 py-2 relative bg-background-light p-6 rounded-xl shadow-lg">
+                    <!-- Timeline Dot -->
+                    <div class="absolute -left-2 top-6 w-4 h-4 bg-accent-orange rounded-full ring-4 ring-white"></div>
+                    
+                    <h3 class="text-2xl font-bold text-text-dark mb-1">Site Engineer Cum Sales Executive</h3>
+                    <p class="text-lg text-primary-teal font-semibold mb-2">Vadodara Gas Limited. | Vadodara, India</p>
+                    <span class="text-sm text-gray-500 font-medium bg-gray-100 px-3 py-1 rounded-full inline-block mb-4">Apr 2022 – Jan 2024</span>
+                    
+                    <ul class="list-disc ml-6 text-gray-700 space-y-2">
+                       <li>Project Management & Execution: I was involved in the planning and execution of City Gas Distribution (CGD) projects, including new CNG station installations and infrastructure upgrades.</li>
+                       <li>Technical Design & Surveys: I assisted in conducting site surveys to identify optimal pipeline routes and contributed to the development of project designs, ensuring adherence to industry standards.</li>
+                       <li>Operational & Safety Support: I helped implement safety protocols, conducted risk assessments, and supported maintenance activities through regular inspections and troubleshooting.</li>
+                       <li>Data Analysis & Optimization: I used data analysis to interpret pressure and flow data, identifying trends and optimizing operational parameters to improve gas distribution efficiency.</li>
+                       <li>Collaboration & Professional Development: I collaborated with multidisciplinary teams to ensure smooth project execution and participated in continuous learning to stay current with emerging technologies and industry advancements.</li>
+                    </ul>
+                </div>
+
+                 <div class="border-l-4 border-primary-teal pl-6 py-2 relative bg-background-light p-6 rounded-xl shadow-lg">
+                    <!-- Experience Item 4: Junior Engineer -->
+                    <div class="absolute -left-2 top-6 w-4 h-4 bg-accent-orange rounded-full ring-4 ring-white"></div>
+                    
+                    <h3 class="text-2xl font-bold text-text-dark mb-1">Station In-charge</h3>
+                    <p class="text-lg text-primary-teal font-semibold mb-2">Gujarat Gas Limited. | Nadiad, India</p>
+                    <span class="text-sm text-gray-500 font-medium bg-gray-100 px-3 py-1 rounded-full inline-block mb-4">Oct 2021 – Mar 2022</span>
+                    
+                    <ul class="list-disc ml-6 text-gray-700 space-y-2">
+                      <li>Safety and Compliance: Ensured strict adherence to all safety standards and regulations for handling, storing, and distributing CNG through regular audits and inspections.</li>
+                      <li>Operational Oversight: Oversaw the daily operations of the CNG station, including monitoring fueling equipment, compressors, and dispensers to ensure correct functionality.</li>
+                      <li>Maintenance Management: Scheduled and supervised routine maintenance and repairs to prevent downtime and maintain safe, efficient station operations.</li>
+                      <li>Staff and Customer Management: Managed and trained station staff in safety procedures, and ensured excellent customer service by addressing inquiries and assisting with fueling.</li>
+                      <li>Record-Keeping: Maintained accurate records of CNG transactions, maintenance activities, safety inspections, and inventory for reporting and compliance.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 lg:py-28 bg-background-light">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold text-text-dark mb-4">Get In Touch</h2>
+            <div class="h-1 w-20 bg-primary-teal mx-auto rounded mb-8"></div>
+            <p class="text-xl text-gray-600 mb-10">
+                I am actively seeking challenging roles in Operations, Maintenance, Technical Design, Project Management & Execution. Let's discuss how my expertise can drive your company forward.
+            </p>
+
+              <div class="space-y-3 mb-10 text-text-dark">
+                <p class="text-lg font-medium flex justify-center items-center">
+                    <!-- Lucide Phone Icon -->
+                    <svg  class="w-5 h-5 mr-3 text-accent-orange" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 3.08 2h3a2 2 0 0 1 2 1.72 17.5 17.5 0 0 0 .54 2.8c-.37.37-1.12.87-1.46 1.25a1.74 1.74 0 0 0-.27 2c.5 1 1.5 2 2.5 3 .9.9 2 2 3 3a1.74 1.74 0 0 0 2 .27c.38-.34.88-1.09 1.25-1.46a17.5 17.5 0 0 0 2.8.54A2 2 0 0 1 22 16.92Z"/></svg>
+                    <a href="tel:+917283085861" target="_blank" class="hover:text-primary-teal transition duration-150">+91 7283085861</a>
+                </p>
+                <p class="text-lg font-medium flex justify-center items-center">
+                    <!-- Simple LinkedIn Icon -->
+                    <svg class="w-5 h-5 mr-3 text-accent-orange" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    <a href="https://www.linkedin.com/in/shubham-kumar-jha-9a5752218/" target="_blank" class="hover:text-primary-teal transition duration-150">linkedin.com/in/ShubhamJha</a>
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-text-dark py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-300">
+            <p class="text-lg font-bold mb-2 text-white">Shubham Kumar Jha</p>
+            <p class="text-sm mb-4">&copy; 2025 Shubham Kumar Jha. All rights reserved.</p>
+            
+            <div class="flex justify-center space-x-6">
+              
+                <a href="mailto: jhashubham2808@gmail.com" target="_blank" class="hover:text-primary-teal transition duration-150">
+                    <!-- Lucide Mail Icon -->
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </a>
+                <a href="Resume.pdf" target="_blank" class="hover:text-primary-teal transition duration-150">
+                    <!-- Lucide File Text Icon (for Resume) -->
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M12 17h4"/><path d="M12 12h4"/><path d="M8 7h4"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
